@@ -1,12 +1,10 @@
-import { join, dirname } from 'node:path';
+import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { parseArgs } from 'node:util';
 import { readFileSync, writeFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
 import packageData from '../../package.json' assert { type: "json" };
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const { PWD } = process.env;
 
 const [major, minor, patch] = packageData.version.split('.').map(Number);
 
@@ -45,7 +43,7 @@ if (argValues['major']) {
   throw new Error('缺少参数！');
 }
 
-const packageJSONPath = join(__dirname, '.', 'package.json');
+const packageJSONPath = join(PWD, 'package.json');
 writeFileSync(
   packageJSONPath,
   readFileSync(packageJSONPath, { encoding: 'utf-8' }).replace(packageData.version, newVersionText)

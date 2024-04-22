@@ -1,3 +1,17 @@
-# @golden-tiger/javascript-package-template
+# @golden-tiger/custom-clean-plugin
 
-JavaScript Package Template
+This webpack plugin will remove all files and directories passed from parameters before webpack bundling.
+
+```
+import CustomCleanPlugin from '@golden-tiger/custom-clean-plugin';
+// ...
+{
+  plugins: [
+    new CustomCleanPlugin([
+      path.join(__dirname, 'dist'),
+      path.join(__dirname, 'index.html'),
+      // ...
+    ]),
+  ],
+}
+```
